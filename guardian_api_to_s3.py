@@ -5,7 +5,6 @@ import boto3
 import pandas as pd
 import requests
 from dotenv import load_dotenv
-
 from ENDPOINT import endpoint
 
 load_dotenv()
