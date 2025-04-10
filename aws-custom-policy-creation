@@ -1,0 +1,97 @@
+USER POLICY ON HOW TO LIST ALL BUCKET AND ALSO OBJECT FOR THE BUCKET NAME "SPARK-JOB"
+ALSO BE ABLE TO DELETE ANY OTHER TYPE FILES EXCEPT FOR CSV
+
+
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "Statement1",
+			"Effect": "Allow",
+			"Action": [
+				"s3:ListAllMyBuckets"
+			],
+			"Resource": [
+				"arn:aws:s3:::*"
+			]
+		},
+		{
+			"Sid": "Statement2",
+			"Effect": "Allow",
+			"Action": [
+				"s3:ListBucket"
+			],
+			"Resource": [
+				"arn:aws:s3:::*spark-job*"
+			]
+		},
+		{
+			"Sid": "Statement3",
+			"Effect": "Allow",
+			"Action": [
+				"s3:DeleteObject",
+				"s3:getBucketVersioning"
+			],
+			"Resource": [
+				"arn:aws:s3:::spark-job-data-input/dumps/*"
+			]
+		},
+		{
+			"Sid": "Statement4",
+			"Effect": "Deny",
+			"Action": [
+				"s3:DeleteObject",
+				"s3:getBucketVersioning"
+			],
+			"Resource": [
+				"arn:aws:s3:::spark-job-data-input/dumps/*.csv"
+			]
+		}
+	]
+}
+
+
+THE SAME USER HAVING THE PRIVILEDGE TO CREATE AN IAM USER ACCOUNT BUT ONLY USERNAME STARTING WITH ENGINEER
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Statement1",
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateUser"
+            ],
+            "Resource": [
+                "arn:aws:iam::340752803932:user/engineer*"
+            ]
+        }
+    ]
+}
+
+
+THE VARIOUS ARM FORMAT/PATTERN FOR THE FOLLOWING SERVICES: RESOURCES
+
+o	S3 accesspoint: arn:${Partition}:s3:${Region}:${Account}:accesspoint/${AccessPointName} 
+      https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html#amazons3-resources-for-iam-policies
+o	S3 bucket: arn:${Partition}:s3:::${BucketName} 
+      https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html#amazons3-resources-for-iam-policies
+o	S3 storagelensgroup: arn:${Partition}:s3:${Region}:${Account}:storage-lens-group/${Name}
+      https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html#amazons3-resources-for-iam-policies
+o	S3 object: arn:${Partition}:s3:::${BucketName}/${ObjectName} 
+      https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html#amazons3-resources-for-iam-policies
+o	IAM mfa: arn:${Partition}:iam::${Account}:mfa/${MfaTokenIdWithPath} 
+      https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsidentityandaccessmanagementiam.html#awsidentityandaccessmanagementiam-resources-for-iam-policies
+o	IAM role: arn:${Partition}:iam::${Account}:role/${RoleNameWithPath} 
+      https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsidentityandaccessmanagementiam.html#awsidentityandaccessmanagementiam-resources-for-iam-policies
+o	IAM user : arn:${Partition}:iam::${Account}:user/${UserNameWithPath} } 
+      https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsidentityandaccessmanagementiam.html#awsidentityandaccessmanagementiam-resources-for-iam-policies
+o	EC2 elastic-ip : arn:${Partition}:ec2:${Region}:${Account}:elastic-ip/${AllocationId} 
+      https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonec2.html#amazonec2-resources-for-iam-policies
+o	EC2 fleet :   arn:${Partition}:ec2:${Region}:${Account}:fleet/${FleetId} 
+      https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonec2.html#amazonec2-resources-for-iam-policies
+o	EC2 instance:  arn:${Partition}:ec2:${Region}:${Account}:instance/${InstanceId} 
+      https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonec2.html#amazonec2-resources-for-iam-policies 
+o	EC2  image:  arn:${Partition}:ec2:${Region}::image/${ImageId} 
+      https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonec2.html#amazonec2-resources-for-iam-policies
+
