@@ -6,7 +6,7 @@ ALSO BE ABLE TO DELETE ANY OTHER TYPE FILES EXCEPT FOR CSV
 	"Version": "2012-10-17",
 	"Statement": [
 		{
-			"Sid": "Statement1",
+			"Sid": "ListallTheBucketOnAws",
 			"Effect": "Allow",
 			"Action": [
 				"s3:ListAllMyBuckets"
@@ -16,7 +16,7 @@ ALSO BE ABLE TO DELETE ANY OTHER TYPE FILES EXCEPT FOR CSV
 			]
 		},
 		{
-			"Sid": "Statement2",
+			"Sid": "ListObjectForSparkJobLikeBucket",
 			"Effect": "Allow",
 			"Action": [
 				"s3:ListBucket"
@@ -26,7 +26,7 @@ ALSO BE ABLE TO DELETE ANY OTHER TYPE FILES EXCEPT FOR CSV
 			]
 		},
 		{
-			"Sid": "Statement3",
+			"Sid": "DeleteObjectFromSubFolder",
 			"Effect": "Allow",
 			"Action": [
 				"s3:DeleteObject",
@@ -37,7 +37,7 @@ ALSO BE ABLE TO DELETE ANY OTHER TYPE FILES EXCEPT FOR CSV
 			]
 		},
 		{
-			"Sid": "Statement4",
+			"Sid": "DeleteObjectForSpecificFileType",
 			"Effect": "Deny",
 			"Action": [
 				"s3:DeleteObject",
@@ -57,13 +57,13 @@ THE SAME USER HAVING THE PRIVILEDGE TO CREATE AN IAM USER ACCOUNT BUT ONLY USERN
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "Statement1",
+            "Sid": "CreateIamUserWithSpecificPrefix",
             "Effect": "Allow",
             "Action": [
                 "iam:CreateUser"
             ],
             "Resource": [
-                "arn:aws:iam::340752803932:user/engineer*"
+                "arn:aws:iam::340752803932:user/engineer_*"
             ]
         }
     ]
